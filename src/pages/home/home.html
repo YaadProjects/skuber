@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button [hidden]="!isRideRequested" ion-button icon-only (click)="cancelRide()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>
+      <span [hidden]="isRideRequested">Skuber</span>
+      <span [hidden]="!isRideRequested">Ride coming...</span>
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="map.centerLocation()">
+        <ion-icon name="navigate"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="home">
+  <div class="map-wrapper">
+    <map #map [isRideRequested]="isRideRequested"></map>
+  </div>
+
+  <div class="bottom request-controls">
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50>
+          <button ion-button block color="light">
+            <ion-icon name="card"></ion-icon>
+            &nbsp; VISA **25
+          </button>
+        </ion-col>
+        <ion-col width-50>
+          <button ion-button block color="light">
+            <ion-icon name="cash"></ion-icon>
+             &nbsp; Cash
+          </button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button [hidden]="isRideRequested" ion-button block color="dark" (click)="requestRide()">Request a Ride</button>
+          <button [hidden]="!isRideRequested" ion-button block color="cancel" (click)="cancelRide()">Cancel Ride</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          YOUR RIDE IS APPROX. 2 MINUTES AWAY
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
