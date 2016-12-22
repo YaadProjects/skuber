@@ -2,11 +2,15 @@ import { Component, OnInit, Input } from '@angular/core';
 import { LoadingController } from 'ionic-angular';
 import { Geolocation } from 'ionic-native';
 import { Observable } from 'rxjs/Observable';
+// import { PickupComponent } from '../pickup/pickup';
 
 @Component({
   selector: 'map',
   templateUrl: 'map.html'
 })
+
+
+
 export class MapComponent implements OnInit {
 
   @Input() isRideRequested: boolean;
