@@ -15,7 +15,8 @@ export class MapComponent implements OnInit {
 
   @Input() isRideRequested: boolean;
 
-  public map;
+  public map: google.maps.Map;
+  public isMapIdle: boolean;
   public location;
 
   constructor(public loadingCtrl: LoadingController) {
@@ -24,14 +25,24 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.map = this.createMap();
+    this.addMapEventListeners();
 
     this.getCurrentLocation().subscribe(location => {
       this.centerLocation(location);
     });
   }
 
-  getCurrentLocation() {
+  addMapEventListeners() {
+    google.maps.event.addListener(this.map, 'dragstart', () => {
+      this.isMapIdle = false;
+    })
 
+    google.maps.event.addListener(this.map, 'idle', () => {
+      this.isMapIdle = true;
+    })
+  }
+
+  getCurrentLocation() {
     let loading = this.loadingCtrl.create({
       content: 'Locating...'
     });
